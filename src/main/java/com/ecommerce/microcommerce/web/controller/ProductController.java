@@ -43,4 +43,9 @@ public class ProductController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @GetMapping(value = "/Produits/prixGreaterThan/{prixLimit}")
+    public List<Product> testeDeRequetes(@PathVariable int prixLimit) {
+        return productDao.findByPrixGreaterThan(400);
+    }
 }
