@@ -3,9 +3,7 @@ package com.ecommerce.microcommerce.web.controller;
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class ProductController {
     @GetMapping(value = "/Produits")
     public List<Product> listeProduits() {
         return productDao.findAll();
+    }
+
+    @PostMapping(value = "/Produits")
+    public void ajouterProduit(@RequestBody Product product) {
+        productDao.save(product);
     }
 }
