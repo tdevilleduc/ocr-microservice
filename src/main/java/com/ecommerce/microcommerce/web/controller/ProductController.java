@@ -48,4 +48,16 @@ public class ProductController {
     public List<Product> testeDeRequetes(@PathVariable int prixLimit) {
         return productDao.chercherUnProduitCher(prixLimit);
     }
+
+    @DeleteMapping (value = "/Produits/{id}")
+    public void supprimerProduit(@PathVariable int id) {
+        Product product = productDao.findById(id);
+        productDao.delete(product);
+    }
+
+    @PutMapping (value = "/Produits")
+    public void updateProduit(@RequestBody Product product) {
+        productDao.save(product);
+    }
+
 }
