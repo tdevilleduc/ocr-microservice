@@ -44,8 +44,8 @@ public class ProductController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping(value = "/Produits/prixGreaterThan/{prixLimit}")
+    @GetMapping(value = "test/produits/{prixLimit}")
     public List<Product> testeDeRequetes(@PathVariable int prixLimit) {
-        return productDao.findByPrixGreaterThan(400);
+        return productDao.chercherUnProduitCher(prixLimit);
     }
 }
