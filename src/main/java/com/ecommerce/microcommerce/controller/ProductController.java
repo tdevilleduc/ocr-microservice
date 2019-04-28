@@ -1,6 +1,7 @@
-package com.ecommerce.microcommerce.web.controller;
+package com.ecommerce.microcommerce.controller;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
+import com.ecommerce.microcommerce.exceptions.ProduitIntrouvableException;
 import com.ecommerce.microcommerce.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,14 @@ public class ProductController {
     private ProductDao productDao;
 
     @GetMapping(value = "/Produits/{id}")
-    public Product afficherUnProduit(@PathVariable int id) {
-        return productDao.findById(id);
+    public Product afficherUnProduit(@PathVariable int id) throws ProduitIntrouvableException {
+        Product product = productDao.findById(id);
+
+        if (product == null) {
+            throw new ProduitIntrouvableException("Le produit avec l'id "+id+" n'existe pas");
+        }
+
+        return product;
     }
 
     @GetMapping(value = "/Produits")
