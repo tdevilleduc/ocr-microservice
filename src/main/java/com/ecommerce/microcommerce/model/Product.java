@@ -2,10 +2,12 @@ package com.ecommerce.microcommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Product {
@@ -13,10 +15,14 @@ public class Product {
     @Id
     @GeneratedValue
     private int id;
+
+    @Length(min=3, max=20)
     private String nom;
+
+    @Min(value = 1)
     private int prix;
 
-    // à ne pas afficher
+    @Min(value = 1)
     private int prixAchat;
 
     public Product() {
