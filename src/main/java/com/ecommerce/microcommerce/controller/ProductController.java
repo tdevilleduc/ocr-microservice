@@ -3,6 +3,8 @@ package com.ecommerce.microcommerce.controller;
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.exceptions.ProduitIntrouvableException;
 import com.ecommerce.microcommerce.model.Product;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +14,14 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-
+@Api( description = "API pour les opérations CRUD sur les produits" )
 @RestController
 public class ProductController {
 
     @Autowired
     private ProductDao productDao;
 
+    @ApiOperation( value = "Récupère un produit grâce à son ID à condition que celui-ci soit en stock" )
     @GetMapping(value = "/Produits/{id}")
     public Product afficherUnProduit(@PathVariable int id) throws ProduitIntrouvableException {
         Product product = productDao.findById(id);
